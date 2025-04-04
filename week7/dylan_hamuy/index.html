@@ -37,6 +37,20 @@
         }
       });
     
+      fetch('/messages')
+    .then(res => res.json())
+    .then(messages => {
+      messages.forEach(msg => {
+        var item = document.createElement('dt');
+        item.textContent = msg.content;
+        messagesDiv.appendChild(item);
+
+        var timestamp = document.createElement('dd');
+        timestamp.textContent = "Previously sent";
+        messagesDiv.appendChild(timestamp);
+      });
+    });
+    
       socket.on('chat message', function(msg) {
         var item = document.createElement('dt');
         item.textContent = msg
